@@ -208,17 +208,65 @@ function SortableVolunteeringCard({ id, vol, index, onChange, onSave, onDelete }
   const style = { transform: CSS.Transform.toString(transform), transition };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="cursor-grab dark-mode p-4 sm:p-6 rounded-xl border-3 border-gray-700/40 backdrop-blur-md bg-opacity-90 space-y-4 shadow-xl">
-      <h3 className="text-lg font-semibold text-gray-700">Volunteering {index + 1}</h3>
-      <input className="input" value={vol.role} onChange={(e) => onChange(index, "role", e.target.value)} placeholder="Role" />
-      <input className="input" value={vol.company} onChange={(e) => onChange(index, "company", e.target.value)} placeholder="Company" />
-      <input className="input" value={vol.start_date} onChange={(e) => onChange(index, "start_date", e.target.value)} placeholder="Start Date" />
-      <input className="input" value={vol.end_date} onChange={(e) => onChange(index, "end_date", e.target.value)} placeholder="End Date" />
-      <textarea className="input" value={vol.description} onChange={(e) => onChange(index, "description", e.target.value)} placeholder="Description" />
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className="dark-mode p-4 sm:p-6 rounded-xl border-3 border-gray-700/40 backdrop-blur-md bg-opacity-90 space-y-4 shadow-xl"
+    >
+      {/* 🟡 Drag handle on header only */}
+      <div className="cursor-grab" {...listeners}>
+        <h3 className="text-lg font-semibold text-gray-700">
+          Volunteering {index + 1}
+        </h3>
+      </div>
+
+      <input
+        className="input"
+        value={vol.role}
+        onChange={(e) => onChange(index, "role", e.target.value)}
+        placeholder="Role"
+      />
+      <input
+        className="input"
+        value={vol.company}
+        onChange={(e) => onChange(index, "company", e.target.value)}
+        placeholder="Company"
+      />
+      <input
+        className="input"
+        value={vol.start_date}
+        onChange={(e) => onChange(index, "start_date", e.target.value)}
+        placeholder="Start Date"
+      />
+      <input
+        className="input"
+        value={vol.end_date}
+        onChange={(e) => onChange(index, "end_date", e.target.value)}
+        placeholder="End Date"
+      />
+      <textarea
+        className="input"
+        value={vol.description}
+        onChange={(e) => onChange(index, "description", e.target.value)}
+        placeholder="Description"
+      />
+
       <div className="flex flex-col sm:flex-row gap-4">
-        <button onClick={() => onSave(index)} className="bg-blue-600 text-white px-4 py-2 rounded w-full sm:w-auto">Save</button>
-        <button onClick={() => onDelete(id)} className="bg-red-600 text-white px-4 py-2 rounded w-full sm:w-auto">Delete</button>
+        <button
+          onClick={() => onSave(index)}
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full sm:w-auto"
+        >
+          Save
+        </button>
+        <button
+          onClick={() => onDelete(id)}
+          className="bg-red-600 text-white px-4 py-2 rounded w-full sm:w-auto"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
 }
+
