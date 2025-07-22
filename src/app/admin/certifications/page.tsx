@@ -201,22 +201,66 @@ export default function AdminCertifications() {
 
 function SortableCertCard({ id, cert, index, onChange, onSave, onDelete }: any) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="cursor-grab dark-mode border-3 border-gray-700/40 backdrop-blur-md bg-opacity-90 p-4 sm:p-6 rounded-xl shadow-xl space-y-4">
-      <h3 className="text-lg font-semibold text-gray-700">Certification {index + 1}</h3>
-      <input className="input" value={cert.title} onChange={(e) => onChange(index, "title", e.target.value)} placeholder="Title" />
-      <input className="input" value={cert.issuer} onChange={(e) => onChange(index, "issuer", e.target.value)} placeholder="Issuer" />
-      <input className="input" value={cert.date} onChange={(e) => onChange(index, "date", e.target.value)} placeholder="Date" />
-      <input className="input" value={cert.certificateUrl} onChange={(e) => onChange(index, "certificateUrl", e.target.value)} placeholder="Certificate URL" />
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className="dark-mode p-4 sm:p-6 rounded-xl shadow-xl border-3 border-gray-700/40 backdrop-blur-md bg-opacity-90 space-y-4"
+    >
+      {/* 🟡 Drag handle ONLY on this div (just like experience page) */}
+      <div className="cursor-grab" {...listeners}>
+        <h3 className="text-lg font-semibold text-gray-700">
+          Certification {index + 1}
+        </h3>
+      </div>
+
+      <input
+        className="w-full px-4 py-2 border rounded-md"
+        value={cert.title}
+        onChange={(e) => onChange(index, "title", e.target.value)}
+        placeholder="Title"
+      />
+      <input
+        className="w-full px-4 py-2 border rounded-md"
+        value={cert.issuer}
+        onChange={(e) => onChange(index, "issuer", e.target.value)}
+        placeholder="Issuer"
+      />
+      <input
+        className="w-full px-4 py-2 border rounded-md"
+        value={cert.date}
+        onChange={(e) => onChange(index, "date", e.target.value)}
+        placeholder="Date"
+      />
+      <input
+        className="w-full px-4 py-2 border rounded-md"
+        value={cert.certificateUrl}
+        onChange={(e) => onChange(index, "certificateUrl", e.target.value)}
+        placeholder="Certificate URL"
+      />
+
       <div className="flex flex-wrap gap-2">
-        <button onClick={() => onSave(index)} className="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
-        <button onClick={() => onDelete(index)} className="bg-red-600 text-white px-4 py-2 rounded">Delete</button>
+        <button
+          onClick={() => onSave(index)}
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Save
+        </button>
+        <button
+          onClick={() => onDelete(index)}
+          className="bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
 }
+
